@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://rrtwc4c75lou"]
+
+[ext_resource type="Script" uid="uid://b2crjo310x3vt" path="res://Utilities/World/Chunks/TileMapLayerManager.cs" id="1_i6rpa"]
+
+[node name="TileMapLayerManager" type="Node" unique_id=924238784]
+script = ExtResource("1_i6rpa")

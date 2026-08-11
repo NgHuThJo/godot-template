@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://5480yx7dfw2p"]
+
+[ext_resource type="Script" uid="uid://c7j3rasyo3hrp" path="res://Utilities/World/Pools/PoolManager.cs" id="1_gnj1s"]
+[ext_resource type="PackedScene" uid="uid://d2r522myufvsu" path="res://Entities/Items/Fuel/fuel_pool.tscn" id="1_vel2n"]
+[ext_resource type="PackedScene" uid="uid://b2k6jr2gd2oev" path="res://Entities/Items/Fuel/fuel.tscn" id="2_gnj1s"]
+
+[node name="PoolManager" type="Node" unique_id=1925835203 node_paths=PackedStringArray("FuelPool")]
+script = ExtResource("1_gnj1s")
+FuelPool = NodePath("FuelPool")
+
+[node name="FuelPool" parent="." unique_id=1905609953 instance=ExtResource("1_vel2n")]
+EntityScene = ExtResource("2_gnj1s")
+QueueMaxSize = 50
