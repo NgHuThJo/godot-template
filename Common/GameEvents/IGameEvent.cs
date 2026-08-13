@@ -1,4 +1,3 @@
-namespace Game.Common.GameEvents.Base
-{
-    public interface IGameEvent { }
-}
+namespace Game.Common.GameEvents;
+
+public interface IGameEvent { }

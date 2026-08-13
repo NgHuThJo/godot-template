@@ -1,4 +1,3 @@
-using Game.Common.Strategies.Attacks;
 using Game.Resources.Attack;
 using Godot;
 
@@ -11,9 +10,6 @@ public partial class AttackComponent : Node2D
 
     [Export]
     public Marker2D Muzzle { get; private set; }
-
-    [Export]
-    public AttackBehaviour Behaviour { get; private set; }
 
     [Export]
     public AudioStreamPlayer Sfx { get; private set; }
@@ -34,16 +30,6 @@ public partial class AttackComponent : Node2D
             return;
         }
 
-        var context = new AttackContext
-        {
-            Source = this,
-            Data = Data,
-            Direction = Vector2.Up,
-            Spawnpoint = Muzzle,
-            SpawnContainer = SpawnContainer,
-        };
-
-        Behaviour.Execute(context);
         Sfx.Play();
 
         Cooldown.Start();

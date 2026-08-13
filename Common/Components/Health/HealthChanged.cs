@@ -1,6 +1,6 @@
-using Game.Common.GameEvents.Base;
+using Game.Common.GameEvents;
 
-namespace Game.Common.GameEvents;
+namespace Game.Common.Components.Health;
 
 public record HealthChanged : IGameEvent
 {

@@ -1,0 +1,95 @@
+using Game.Common.GameEvents;
+using Game.Common.Persistence;
+using Game.Entities.Player;
+using Game.UI;
+using Game.Utilities.Autoloads;
+using Godot;
+using Utils;
+
+namespace Game.Utilities.World.Levels;
+
+public partial class LevelManager : Node, ISaveable
+{
+    [Export]
+    public Player Player { get; set; }
+
+    public int Score { get; private set; } = 0;
+    public int Level { get; private set; } = 1;
+
+    public override void _EnterTree()
+    {
+        Player.SetSpawnContainer(this);
+    }
+
+    public override void _Ready()
+    {
+        UIManager.Instance.HUDManager.ResetHUD(Score, Level);
+        UIManager.Instance.HUDManager.Show();
+
+        // EventBus.Instance.Subscribe<PlayerCollided>(OnPlayerCollided);
+        // EventBus.Instance.Subscribe<EnemyDied>(OnEnemyDied);
+    }
+
+    public override void _PhysicsProcess(double delta)
+    {
+        // GD.Print(
+        //     $"LEVEL MANAGER PHYSICS "
+        //         + $"frame={Engine.GetPhysicsFrames()} "
+        //         + $"process={Engine.GetProcessFrames()} "
+        //         + $"id={GetInstanceId()} "
+        //         + $"inside={IsInsideTree()} "
+        //         + $"queued={IsQueuedForDeletion()}"
+        // );
+    }
+
+    public override void _ExitTree()
+    {
+        // EventBus.Instance.Unsubscribe<PlayerCollided>(OnPlayerCollided);
+        // EventBus.Instance.Unsubscribe<EnemyDied>(OnEnemyDied);
+    }
+
+    public void OnEnemyDied(EnemyDied context)
+    {
+        IncreaseScore(context.Points);
+
+        var newContext = new ScoreChanged { Score = Score };
+
+        EventBus.Instance.Publish(newContext);
+    }
+
+    public void OnPlayerCollided(PlayerCollided context)
+    {
+        ShowGameoverScreen();
+    }
+
+    public void IncreaseScore(int score)
+    {
+        Score += score;
+    }
+
+    public void IncrementLevel()
+    {
+        Level++;
+    }
+
+    public void ShowGameoverScreen()
+    {
+        SaveManager.Instance.Save();
+
+        var instance = LoadedScenes.GameoverScreen.Instantiate<UIScreen>();
+        UIManager.Instance.Push(instance);
+        UIManager.Instance.HUDManager.Hide();
+    }
+
+    public void Save()
+    {
+        SaveManager.Instance.GameSaveState.Highscore = Mathf.Max(
+            SaveManager.Instance.GameSaveState.Highscore,
+            Score
+        );
+        SaveManager.Instance.GameSaveState.HighestLevel = Mathf.Max(
+            SaveManager.Instance.GameSaveState.HighestLevel,
+            Level
+        );
+    }
+}

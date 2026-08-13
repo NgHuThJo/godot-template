@@ -1,10 +1,9 @@
 using System;
-using Game.Common.GameEvents;
-using Game.Common.GameEvents.Events;
+using Game.Common.Components.AreaBoxes.Hurtbox;
 using Game.Resources.Health;
 using Godot;
 
-namespace Game.Common.Components;
+namespace Game.Common.Components.Health;
 
 public partial class HealthComponent : Node
 {
@@ -35,6 +34,7 @@ public partial class HealthComponent : Node
     public void TakeDamage(float damage)
     {
         CurrentHealth -= damage;
+        CurrentHealth = Mathf.Clamp(CurrentHealth, 0, Data.MaxHealth);
     }
 
     public bool IsDead()
@@ -42,11 +42,9 @@ public partial class HealthComponent : Node
         return CurrentHealth <= 0;
     }
 
-    public void OnHitReceived(HitReceivedEvent context)
+    public void OnHitReceived(HitReceived context)
     {
-        TakeDamage(context.HitSource.AttackData.Damage);
-
-        CurrentHealth = Mathf.Clamp(CurrentHealth, 0, Data.MaxHealth);
+        TakeDamage(context.Hitter.AttackData.Damage);
 
         var healthChangedContext = new HealthChanged() { CurrentHealth = CurrentHealth };
 

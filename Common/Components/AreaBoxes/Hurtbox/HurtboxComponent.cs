@@ -1,12 +1,12 @@
 using System;
-using Game.Common.GameEvents.Events;
+using Game.Common.Components.AreaBoxes.Hitbox;
 using Godot;
 
-namespace Game.Common.Components;
+namespace Game.Common.Components.AreaBoxes.Hurtbox;
 
 public partial class HurtboxComponent : Area2D
 {
-    public event Action<HitReceivedEvent> HitReceived;
+    public event Action<HitReceived> HitReceived;
 
     public override void _Ready()
     {
@@ -22,7 +22,7 @@ public partial class HurtboxComponent : Area2D
     {
         if (area is HitboxComponent hitbox)
         {
-            var context = new HitReceivedEvent { HitSource = hitbox };
+            var context = new HitReceived { Hitter = hitbox };
 
             HitReceived?.Invoke(context);
         }

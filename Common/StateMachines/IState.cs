@@ -2,13 +2,14 @@ using Godot;
 
 namespace Game.Common.StateMachines;
 
-public interface IState
+public interface IState<T>
+    where T : IState<T>
 {
-    public void Enter();
-    public void Exit();
     public void Input(InputEvent @event);
     public void UnhandledInput(InputEvent @event);
     public void PhysicsUpdate(double delta);
     public void Update(double delta);
-    public bool CanTransition(IState current, IState next);
+    public void Enter();
+    public void Exit();
+    public bool CanTransition(T current, T next);
 }

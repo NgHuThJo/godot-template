@@ -1,7 +1,7 @@
 namespace Game.Common.StateMachines;
 
 public abstract class StateMachine<T>
-    where T : IState
+    where T : IState<T>
 {
     public T CurrentState { get; protected set; }
 

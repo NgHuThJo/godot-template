@@ -1,6 +1,4 @@
-using Game.Common.GameEvents.Base;
-
-namespace Game.Common.GameEvents;
+namespace Game.Common.GameEvents.Settings;
 
 public record VolumeValueChanged : IGameEvent
 {

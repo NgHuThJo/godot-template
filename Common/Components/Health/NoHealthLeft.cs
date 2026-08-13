@@ -1,7 +1,7 @@
-using Game.Common.GameEvents.Base;
+using Game.Common.GameEvents;
 using Godot;
 
-namespace Game.Common.GameEvents;
+namespace Game.Common.Components.Health;
 
 public record NoHealthLeft : IGameEvent
 {
