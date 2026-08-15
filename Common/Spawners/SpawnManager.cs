@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 
-namespace Game.Utilities.World.Levels;
+namespace Game.Common.Spawners;
 
 public partial class SpawnManager : Node
 {
@@ -10,7 +10,8 @@ public partial class SpawnManager : Node
 
     public override void _Ready()
     {
-        var spawnPoints = GetTree().GetNodesInGroup("SpawnPoints").ToList();
+        var spawnPoints = GetTree().GetNodesInGroup("SpawnPoints").Cast<SpawnPoint>().ToList();
+        SpawnPoints = spawnPoints;
     }
 
     public override void _Process(double delta) { }

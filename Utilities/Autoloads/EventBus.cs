@@ -1,5 +1,5 @@
 using System;
-using Game.Common.GameEvents;
+using Game.Common.GameEvents.Global;
 using Game.Entities.Enemies;
 using Game.UI.HUD;
 using Godot;

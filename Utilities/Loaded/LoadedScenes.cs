@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Game.Utilities.World;
+namespace Game.Utilities.Loaded;
 
 public static class LoadedScenes
 {

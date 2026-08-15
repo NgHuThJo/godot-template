@@ -4,7 +4,7 @@ using Game.Common.Components.Health;
 using Game.Common.GameEvents;
 using Game.Common.Particles;
 using Game.Utilities.Autoloads;
-using Game.Utilities.World;
+using Game.Utilities.Loaded;
 using Godot;
 
 namespace Game.Entities.Enemies;
@@ -47,7 +47,7 @@ public partial class Enemy : CharacterBody2D
 
         HasDied = true;
 
-        EffectManager.Instance.Spawn<Explosion>(LoadedEffects.Explosion, GlobalPosition);
+        EffectManager.Instance.Spawn<Explosion>(LoadedVfx.Explosion, GlobalPosition);
         AudioManager.Instance.PlaySfx(LoadedSfx.Explosion);
 
         QueueFree();

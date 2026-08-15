@@ -1,13 +1,14 @@
-using Game.Common.GameEvents;
+using Game.Common.GameEvents.Global;
 using Game.Common.Persistence;
 using Game.Entities.Enemies;
 using Game.Entities.Player;
 using Game.UI;
 using Game.Utilities.Autoloads;
+using Game.Utilities.Loaded;
 using Godot;
 using Utils;
 
-namespace Game.Utilities.World.Levels;
+namespace Game.Utilities.World.Maps;
 
 public partial class LevelManager : Node, ISaveable
 {
@@ -27,7 +28,6 @@ public partial class LevelManager : Node, ISaveable
         UIManager.Instance.HUDManager.ResetHUD(Score, Level);
         UIManager.Instance.HUDManager.ShowHUD();
 
-        // EventBus.Instance.Subscribe<PlayerCollided>(OnPlayerCollided);
         EventBus.Instance.EnemyDied += OnEnemyDied;
     }
 
@@ -55,11 +55,6 @@ public partial class LevelManager : Node, ISaveable
         var currentContext = new ScoreChanged { Score = Score };
 
         EventBus.Instance.ScoreChanged.Invoke(currentContext);
-    }
-
-    public void OnPlayerCollided(PlayerCollided context)
-    {
-        ShowGameoverScreen();
     }
 
     public void IncreaseScore(int score)

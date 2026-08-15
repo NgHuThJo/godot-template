@@ -1,4 +1,4 @@
-using Game.Common.GameEvents;
+using Game.Common.GameEvents.Global;
 using Game.Utilities.Autoloads;
 using Godot;
 

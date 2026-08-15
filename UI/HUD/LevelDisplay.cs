@@ -1,4 +1,3 @@
-using Game.UI.HUD;
 using Game.Utilities.Autoloads;
 using Godot;
 

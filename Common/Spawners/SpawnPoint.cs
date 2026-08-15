@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Game.Utilities.World.Levels;
+namespace Game.Common.Spawners;
 
 public partial class SpawnPoint : Node2D
 {

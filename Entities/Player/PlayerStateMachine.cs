@@ -1,5 +1,4 @@
 using Game.Common.StateMachines;
-using Game.Utilities.Autoloads;
 using Godot;
 
 namespace Game.Entities.Player;

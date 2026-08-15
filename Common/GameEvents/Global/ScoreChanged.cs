@@ -1,4 +1,4 @@
-namespace Game.Common.GameEvents;
+namespace Game.Common.GameEvents.Global;
 
 public record ScoreChanged : IGameEvent
 {

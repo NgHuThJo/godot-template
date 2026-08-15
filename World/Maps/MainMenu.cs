@@ -1,10 +1,11 @@
 using Game.UI;
 using Game.UI.Settings;
 using Game.Utilities.Autoloads;
+using Game.Utilities.Loaded;
 using Godot;
 using Utils;
 
-namespace Game.Utilities.World.Levels;
+namespace Game.Utilities.World.Maps;
 
 public partial class MainMenu : UIScreen
 {
@@ -39,7 +40,6 @@ public partial class MainMenu : UIScreen
     public async void OnSettingsPressed()
     {
         var instance = LoadedScenes.Settings.Instantiate<Settings>();
-
         UIManager.Instance.Push(instance);
     }
 

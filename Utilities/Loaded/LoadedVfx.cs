@@ -1,8 +1,8 @@
 using Godot;
 
-namespace Game.Utilities.World;
+namespace Game.Utilities.Loaded;
 
-public static class LoadedEffects
+public static class LoadedVfx
 {
     public static readonly PackedScene Explosion = GD.Load<PackedScene>("uid://c321wfxbhhglk");
 }

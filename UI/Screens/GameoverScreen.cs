@@ -1,7 +1,7 @@
 using Game.UI;
 using Game.Utilities.Autoloads;
-using Game.Utilities.World;
-using Game.Utilities.World.Levels;
+using Game.Utilities.Loaded;
+using Game.Utilities.World.Maps;
 using Godot;
 
 namespace Utils;
