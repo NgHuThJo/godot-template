@@ -1,7 +1,6 @@
-using System;
 using Game.Common.Components;
-using Game.Common.GameEvents;
-using Game.Utilities.Autoloads;
+using Game.Common.Components.AreaBoxes.Hurtbox;
+using Game.Common.Components.Health;
 using Godot;
 
 namespace Game.Entities.Player;
@@ -26,12 +25,7 @@ public partial class Player : CharacterBody2D
     [Export]
     public PlayerData Data { get; private set; }
     public PlayerStateMachine StateMachine { get; init; } = new();
-    public FuelTank FuelTank { get; private set; } = new(0.5f);
     private Node SpawnContainer { get; set; }
-    public float FuelDrain { get; init; } = 0.02f;
-    public float FuelUp { get; set; } = 0;
-    public int FuelCounter { get; set; } = 0;
-    private bool IsDead { get; set; } = false;
 
     // public override void _EnterTree()
     // {
@@ -47,18 +41,11 @@ public partial class Player : CharacterBody2D
         // GD.Print($"PLAYER READY {GetInstanceId()}");
         Initialize();
 
-        StateMachine.ChangeState(new PlayerIdleState(this, StateMachine));
-        EventBus.Instance.Subscribe<FuelAreaEntered>(OnFuelAreaEntered);
-        EventBus.Instance.Subscribe<FuelAreaExited>(OnFuelAreaExited);
+        StateMachine.ChangeState(new PlayerMovingState(this, StateMachine));
     }
 
     public override void _PhysicsProcess(double delta)
     {
-        if (IsDead)
-        {
-            return;
-        }
-
         // GD.Print(
         //     $"PLAYER PHYSICS "
         //         + $"frame={Engine.GetPhysicsFrames()} "
@@ -68,34 +55,10 @@ public partial class Player : CharacterBody2D
         //         + $"queued={IsQueuedForDeletion()}"
         // );
 
-        if (FuelTank.IsEmpty())
-        {
-            IsDead = true;
-
-            var context = new NoFuelLeft();
-            EventBus.Instance.Publish(context);
-            return;
-        }
-
         var direction = Controller.MovementDirection;
         Movement.ApplyHorizontalVelocity(direction.X);
         Movement.ApplyGravity(delta);
         MoveAndSlide();
-
-        if (GetSlideCollisionCount() > 0)
-        {
-            IsDead = true;
-
-            var context = new PlayerCollided { };
-
-            EventBus.Instance.Publish(context);
-            return;
-        }
-
-        if (Controller.IsShooting)
-        {
-            Attack.Attack();
-        }
 
         StateMachine.Update(delta);
     }
@@ -107,8 +70,6 @@ public partial class Player : CharacterBody2D
         //         + $"physics={Engine.GetPhysicsFrames()} "
         //         + $"process={Engine.GetProcessFrames()}"
         // );
-        EventBus.Instance.Unsubscribe<FuelAreaEntered>(OnFuelAreaEntered);
-        EventBus.Instance.Unsubscribe<FuelAreaExited>(OnFuelAreaExited);
     }
 
     public void Initialize()
@@ -121,25 +82,5 @@ public partial class Player : CharacterBody2D
     public void SetSpawnContainer(Node spawnContainer)
     {
         SpawnContainer = spawnContainer;
-    }
-
-    public void OnFuelAreaEntered(FuelAreaEntered context)
-    {
-        FuelUp += context.FuelUp;
-        FuelCounter++;
-
-        StateMachine.ChangeState(new PlayerRefuelState(this, StateMachine));
-    }
-
-    public void OnFuelAreaExited(FuelAreaExited context)
-    {
-        FuelUp -= context.FuelDown;
-        FuelCounter--;
-
-        if (FuelCounter == 0)
-        {
-            FuelUp = 0;
-            StateMachine.ChangeState(new PlayerIdleState(this, StateMachine));
-        }
     }
 }

@@ -1,4 +1,4 @@
-using Game.Common.GameEvents;
+using Game.UI.HUD;
 using Game.Utilities.Autoloads;
 using Godot;
 
@@ -11,13 +11,14 @@ public partial class LevelDisplay : PanelContainer
 
     public override void _Ready()
     {
-        EventBus.Instance.Subscribe<LevelChanged>(OnLevelChanged);
+        EventBus.Instance.LevelChanged += OnLevelChanged;
+
         LevelLabel.Text = 1.ToString();
     }
 
     public override void _ExitTree()
     {
-        EventBus.Instance.Unsubscribe<LevelChanged>(OnLevelChanged);
+        EventBus.Instance.LevelChanged -= OnLevelChanged;
     }
 
     public void SetLevel(int level)

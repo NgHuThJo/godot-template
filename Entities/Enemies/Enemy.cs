@@ -1,4 +1,6 @@
 using Game.Common.Components;
+using Game.Common.Components.AreaBoxes.Hurtbox;
+using Game.Common.Components.Health;
 using Game.Common.GameEvents;
 using Game.Common.Particles;
 using Game.Utilities.Autoloads;
@@ -50,6 +52,6 @@ public partial class Enemy : CharacterBody2D
 
         QueueFree();
         var context = new EnemyDied { Points = Data.Points };
-        EventBus.Instance.Publish(context);
+        EventBus.Instance.EnemyDied.Invoke(context);
     }
 }

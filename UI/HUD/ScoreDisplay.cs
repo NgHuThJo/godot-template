@@ -11,13 +11,13 @@ public partial class ScoreDisplay : Control
 
     public override void _Ready()
     {
-        EventBus.Instance.Subscribe<ScoreChanged>(OnScoreChanged);
+        EventBus.Instance.ScoreChanged += OnScoreChanged;
         ScoreLabel.Text = 0.ToString();
     }
 
     public override void _ExitTree()
     {
-        EventBus.Instance.Unsubscribe<ScoreChanged>(OnScoreChanged);
+        EventBus.Instance.ScoreChanged -= OnScoreChanged;
     }
 
     public void SetScore(int score)

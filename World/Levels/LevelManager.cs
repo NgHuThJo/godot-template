@@ -1,5 +1,6 @@
 using Game.Common.GameEvents;
 using Game.Common.Persistence;
+using Game.Entities.Enemies;
 using Game.Entities.Player;
 using Game.UI;
 using Game.Utilities.Autoloads;
@@ -24,10 +25,10 @@ public partial class LevelManager : Node, ISaveable
     public override void _Ready()
     {
         UIManager.Instance.HUDManager.ResetHUD(Score, Level);
-        UIManager.Instance.HUDManager.Show();
+        UIManager.Instance.HUDManager.ShowHUD();
 
         // EventBus.Instance.Subscribe<PlayerCollided>(OnPlayerCollided);
-        // EventBus.Instance.Subscribe<EnemyDied>(OnEnemyDied);
+        EventBus.Instance.EnemyDied += OnEnemyDied;
     }
 
     public override void _PhysicsProcess(double delta)
@@ -44,17 +45,16 @@ public partial class LevelManager : Node, ISaveable
 
     public override void _ExitTree()
     {
-        // EventBus.Instance.Unsubscribe<PlayerCollided>(OnPlayerCollided);
-        // EventBus.Instance.Unsubscribe<EnemyDied>(OnEnemyDied);
+        EventBus.Instance.EnemyDied -= OnEnemyDied;
     }
 
     public void OnEnemyDied(EnemyDied context)
     {
         IncreaseScore(context.Points);
 
-        var newContext = new ScoreChanged { Score = Score };
+        var currentContext = new ScoreChanged { Score = Score };
 
-        EventBus.Instance.Publish(newContext);
+        EventBus.Instance.ScoreChanged.Invoke(currentContext);
     }
 
     public void OnPlayerCollided(PlayerCollided context)

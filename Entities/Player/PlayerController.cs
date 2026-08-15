@@ -14,6 +14,4 @@ public partial class PlayerController : CharacterController
             return new() { X = direction.X, Y = direction.Y };
         }
     }
-
-    public override bool IsShooting => Input.IsActionPressed("shoot");
 }
