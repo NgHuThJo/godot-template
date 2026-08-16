@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://dh7hvf1lg38oc"]
 
 [ext_resource type="Script" uid="uid://dqobc0fydy25" path="res://UI/HUD/HUDManager.cs" id="1_3qynt"]
-[ext_resource type="PackedScene" uid="uid://cafksnifw8v0b" path="res://UI/HUD/fuel_display.tscn" id="2_3qynt"]
 [ext_resource type="PackedScene" uid="uid://c7qr36ip78kly" path="res://UI/HUD/score_display.tscn" id="3_0fyxv"]
 [ext_resource type="PackedScene" uid="uid://bjkj60gdfc01j" path="res://UI/HUD/level_display.tscn" id="4_uecsm"]
 
@@ -36,9 +35,6 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="FuelDisplay" parent="PanelContainer/MarginContainer2/HBoxContainer" unique_id=1284233771 instance=ExtResource("2_3qynt")]
-layout_mode = 2
-size_flags_horizontal = 3
 
 [node name="LevelDisplay" parent="PanelContainer/MarginContainer2/HBoxContainer" unique_id=570285467 instance=ExtResource("4_uecsm")]
 layout_mode = 2

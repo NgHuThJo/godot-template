@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://c7qr36ip78kly"]
 
 [ext_resource type="Script" uid="uid://w5l1jw1acdix" path="res://UI/HUD/ScoreDisplay.cs" id="1_21ked"]
-[ext_resource type="LabelSettings" uid="uid://ql02y2aiciat" path="res://UI/HUD/label_settings.tres" id="2_rwy21"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p23ne"]
 bg_color = Color(0, 0.7176471, 0.3647059, 0)
@@ -31,8 +30,6 @@ alignment = 1
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer" unique_id=1789040725]
 layout_mode = 2
 text = "Score: "
-label_settings = ExtResource("2_rwy21")
 
 [node name="ScoreLabel" type="Label" parent="MarginContainer/HBoxContainer" unique_id=1360082654]
 layout_mode = 2
-label_settings = ExtResource("2_rwy21")

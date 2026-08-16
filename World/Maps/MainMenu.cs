@@ -1,6 +1,5 @@
 using Game.UI;
 using Game.UI.Settings;
-using Game.Utilities.Autoloads;
 using Game.Utilities.Loaded;
 using Godot;
 using Utils;
@@ -34,7 +33,7 @@ public partial class MainMenu : UIScreen
 
     public async void OnStartPressed()
     {
-        await TransitionManager.Instance.TransitionToScene<LevelManager>(LoadedScenes.LevelManager);
+        // await TransitionManager.Instance.TransitionToScene<LevelManager>(LoadedScenes.LevelManager);
     }
 
     public async void OnSettingsPressed()

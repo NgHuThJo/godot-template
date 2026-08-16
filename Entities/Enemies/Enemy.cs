@@ -1,7 +1,6 @@
 using Game.Common.Components;
 using Game.Common.Components.AreaBoxes.Hurtbox;
 using Game.Common.Components.Health;
-using Game.Common.GameEvents;
 using Game.Common.Particles;
 using Game.Utilities.Autoloads;
 using Game.Utilities.Loaded;
@@ -47,8 +46,8 @@ public partial class Enemy : CharacterBody2D
 
         HasDied = true;
 
-        EffectManager.Instance.Spawn<Explosion>(LoadedVfx.Explosion, GlobalPosition);
-        AudioManager.Instance.PlaySfx(LoadedSfx.Explosion);
+        // EffectManager.Instance.Spawn<Explosion>(LoadedVfx.Explosion, GlobalPosition);
+        // AudioManager.Instance.PlaySfx(LoadedSfx.Explosion);
 
         QueueFree();
         var context = new EnemyDied { Points = Data.Points };

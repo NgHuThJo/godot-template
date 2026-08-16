@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://bjkj60gdfc01j"]
 
 [ext_resource type="Script" uid="uid://clu7dbynhi572" path="res://UI/HUD/LevelDisplay.cs" id="1_b5ihp"]
-[ext_resource type="LabelSettings" uid="uid://ql02y2aiciat" path="res://UI/HUD/label_settings.tres" id="2_baghb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b5ihp"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -31,8 +30,6 @@ alignment = 1
 [node name="Level" type="Label" parent="MarginContainer/HBoxContainer" unique_id=708760124]
 layout_mode = 2
 text = "Level:  "
-label_settings = ExtResource("2_baghb")
 
 [node name="CurrentLevel" type="Label" parent="MarginContainer/HBoxContainer" unique_id=1927396142]
 layout_mode = 2
-label_settings = ExtResource("2_baghb")

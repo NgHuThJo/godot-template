@@ -59,7 +59,7 @@ public partial class GameoverScreen : UIScreen
     public void OnRestart()
     {
         UIManager.Instance.Pop();
-        SceneManager.Instance.ChangeScene<LevelManager>(LoadedScenes.LevelManager);
+        // SceneManager.Instance.ChangeScene<LevelManager>(LoadedScenes.LevelManager);
         GetTree().Paused = false;
         // GD.Print(
         //     $"Gameover restart level process mode: {ProcessMode}, "
