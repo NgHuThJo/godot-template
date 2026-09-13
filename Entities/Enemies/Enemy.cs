@@ -1,6 +1,6 @@
 using Game.Common.Components;
-using Game.Common.Components.AreaBoxes.Hurtbox;
-using Game.Common.Components.Health;
+using Game.Common.Components.CollisionDetection.Hurtbox;
+using Game.Common.Components.Combat.Health;
 using Game.Common.Particles;
 using Game.Utilities.Autoloads;
 using Game.Utilities.Loaded;
@@ -27,7 +27,6 @@ public partial class Enemy : CharacterBody2D
     public override void _Ready()
     {
         Movement.Initialize(Data.MovementData);
-        Health.Initialize(Data.HealthData);
 
         Health.NoHealthLeft += OnNoHealthLeft;
     }

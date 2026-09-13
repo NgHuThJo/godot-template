@@ -1,4 +1,4 @@
-using Game.Common.Components.AreaBoxes.Hitbox;
+using Game.Common.Components.CollisionDetection.Hitbox;
 using Game.Resources.Attack;
 using Godot;
 
